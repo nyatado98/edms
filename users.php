@@ -12,6 +12,22 @@ if (!$conn) {
 
 	$sql = "SELECT * FROM users";
 	$result = mysqli_query($conn,$sql);
+	//edit a spesific user
+	$message = "";
+	if(isset($_POST['edit'])){
+		$id = $_POST['id'];
+		$fullname = $_POST['fullname'];
+		$email = $_POST['email'];
+		$phone_no = $_POST['phone_no'];
+
+		$sql = "UPDATE users SET fullname = '$fullname', email = '$email', phone_no = '$phone_no' WHERE id='$id'";
+		$query =mysqli_query($conn,$sql);
+		if($query){
+			$message = "User successfully updated";
+		}else{
+			$message = "Something went wrong please try again";
+		}
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -68,6 +84,9 @@ if (!$conn) {
     	<div class="table-responsive">
     	<table class="table table-striped table-bordered table-dark table-hover">
     		<thead>
+				<tr>
+					<td class="text-success font-weight-bold"><?php echo $message;?></td>
+				</tr>
     			<tr>
     				<td class="text-center font-weight-bold">#</td>
     				<td class="text-center font-weight-bold">Fullname</td>
@@ -100,7 +119,7 @@ if (!$conn) {
 							      </div>
 							      <div class="modal-body">
 							      	<form method="post" action="">
-							      		<input type="number" name="id" class="form-control" value="<?php echo $rows['id'];?>">
+							      		<input type="number" name="id" class="form-control" value="<?php echo $rows['id'];?>" hidden>
 							      		<label class="font-weight-bold">Fullname :</label>
 							      		<input type="text" name="fullname" class="form-control" value="<?php echo $rows['fullname'];?>
 							      		">
