@@ -29,7 +29,7 @@ $mysqli = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
  
 // Check connection
 if($mysqli === false){
-    die("ERROR: Could not connect. " . $mysqli->connect_error);
+    die("ERROR: Could not connect. ");
 }
 
  $emailerr = $passworderr = $emailerrr = $passworderrr = $acc_err = "";
@@ -103,16 +103,24 @@ if (isset($_POST['login'])) {
                             $_SESSION["loggedin"] = true;
                             $_SESSION["email"] = $email;    
                             
-                            // Redirect user to welcome page
+                            $sql = "SELECT * FROM users WHERE email = '$email'";
+                            $re = mysqli_query($mysqli,$sql);
+// var_dump($re);
+                                while($row = $re->fetch_assoc()) {
+                                  // $row['fullname'] = $fullname;
+                                  // $row['user_type'] = $user_type;
+                                     //insert into logs table in db
+                                     date_default_timezone_set('Africa/Nairobi');
+                                     $login_time=strtotime("current");
+                                     $login_time = date('Y/m/d  H:i:sa');
+                                     $query = "INSERT INTO logs (fullname,user_type,email,login_time,logout_time,total_time)VALUES ('".$row["fullname"]."','".$row["user_type"]."','$email','$login_time','','')";
+                                     $result = mysqli_query($mysqli, $query);
+                              }
+                            // Redirect user to index page
                             header("location:index.php");
-               //              date_default_timezone_set('Africa/Nairobi');
-		          			// $Date=strtotime("current");
-		          			// $Date = date('Y/m/d  H:i:sa');
-               //              $query = "INSERT INTO user_logs (user_type,tel,Date)VALUES ('Admin','$tel','$Date')";
-               //              $result = mysqli_query($mysqli,$query);
-
-               //              $sql = "UPDATE users SET user_status ='Loggedin' WHERE tel = '$tel' AND user_type='admin'";
-               //              $rest = mysqli_query($mysqli,$sql);
+                            
+                            // $sql = "UPDATE users SET user_status ='Loggedin' WHERE tel = '$tel' AND user_type='admin'";
+                            // $rest = mysqli_query($mysqli,$sql);
 
 
                         } else{
