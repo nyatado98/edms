@@ -9,15 +9,19 @@ $mysqli = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
  
 // Check connection
 if($mysqli === false){
-    die("ERROR: Could not connect. " . $mysqli->connect_error);
+    die("ERROR: Could not connect. ");
 }
 $user_status = 'Not Loggedin';
-$fullnameerr = $emailerr = $phone_noerr = $passworderr = $repassworderr = $err = $strlenerr ="";
+$typeerr = $fullnameerr = $emailerr = $phone_noerr = $passworderr = $repassworderr = $err = $strlenerr ="";
 
-$fullname = $email = $phone_no = $password = $repassword ="";
+$user_type = $fullname = $email = $phone_no = $password = $repassword ="";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-
+    if(empty(trim($_POST["user_type"]))){
+        $typeerr = "Please select user type.";
+    } else{
+        $user_type = trim($_POST["user_type"]);
+    }
 	if(empty(trim($_POST["fullname"]))){
         $fullnameerr = "Please enter fullname.";
     } else{
@@ -67,18 +71,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 
 //checking if there are no existing errors
-if(empty($fullnameerr) && empty($emailerr) && empty($phone_noerr) &&  empty($passworderr) && empty($repassworderr)){
+if(empty($typeerr) && empty($fullnameerr) && empty($emailerr) && empty($phone_noerr) &&  empty($passworderr) && empty($repassworderr)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO users (user_type,fullname, phone_no,email, password) VALUES ('SupperAdmin',?,?,?,?)";
+        $sql = "INSERT INTO users (user_type,fullname, phone_no,email, password) VALUES (?,?,?,?,?)";
 
          if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("ssss",  $param_fullname, $param_phone_no,  $param_email, $param_password);
+            $stmt->bind_param("sssss",$param_user_type, $param_fullname, $param_phone_no,  $param_email, $param_password);
             
 
                    // Set parameters
-           
+           $param_user_type = $user_type;
             $param_fullname = $fullname;
             
             $param_phone_no = $phone_no;
@@ -133,6 +137,16 @@ if(empty($fullnameerr) && empty($emailerr) && empty($phone_noerr) &&  empty($pas
                           <h4 class="text-center font-weight-bold">Fill The Fields Below</h4>
 		              </div>
                       <div class="card-body">
+                      <label class="font-weight-bold">Enter your User type :</label>
+                        <select class="form-control" name="user_type">
+                            <option value="">-Select type-</option>
+                            <option>Admin</option>
+                            <option>ICT</option>
+                            <option>CLERCK</option>
+                            <option>TREASURER</option>
+                            <option>SECRETARY</option>
+                        </select>
+                        <span class="text-danger"><?php echo $typeerr;?></span><br>
                         <label class="font-weight-bold">Enter your fullname :</label>
 		              <input type="text" name="fullname" placeholder="Enter fullname" class="form-control" value="<?php echo $fullname; ?>">
 		              <span class="text-danger"><?php echo $fullnameerr; ?></span><br>
