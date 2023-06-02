@@ -12,6 +12,7 @@ if($mysqli === false){
     die("ERROR: Could not connect. ");
 }
 $email = $_SESSION['email'];
+$login_time = $_SESSION['login_time'];
 
 unset($_SESSION['loggedin']);
 unset($_SESSION['email']);
@@ -28,25 +29,33 @@ unset($_SESSION['email']);
 date_default_timezone_set('Africa/Nairobi');
                                      $logout_time=strtotime("current");
                                      $logout_time = date('Y/m/d  H:i:sa');
+    $sql = "UPDATE logs SET logout_time ='$logout_time' WHERE login_time = '$login_time'";
+    $result = mysqli_query($mysqli, $sql);
 
-$sql = "UPDATE logs SET logout_time ='$logout_time' WHERE email = '$email'";
-$result = mysqli_query($mysqli,$sql);
-
-
-$sql = "SELECT * FROM logs WHERE email = '$email'";
+$sql = "SELECT * FROM logs WHERE login_time = '$login_time'";
 $re = mysqli_query($mysqli,$sql);
 while($row = $re->fetch_assoc()){
 
 $row['login_time'] = $login_time;
 $row['logout_time'] = $logout_time;
 
-$login_time =new DateTime($login_time);
-$logout_time =new DateTime($logout_time);
+date_default_timezone_set('Africa/Nairobi');
+$row['login_time'] =new DateTime($row['login_time']);
+$row['logout_time'] =new DateTime($row['logout_time']);
 
-$total_time = $login_time->diff($logout_time);
-$to = $total_time->format('%H:%I:%S');
+$total_time = $row['login_time']->diff($row['logout_time']);
+// var_dump($total_time->format('%H'));
+$diff = $total_time->format('%s');
 
-$sql = "UPDATE logs SET total_time ='$to' WHERE email = '$email'";
+if($diff <= 60){
+    $dif = $diff .'Secs';
+}elseif($diff > 60){
+    $dif =($diff/60) .'Minutes';
+}elseif($diff >= 3600){
+    $dif = ($diff/3600). 'Hours';
+}
+
+$sql = "UPDATE logs SET total_time ='$dif' WHERE login_time = '$login_time'";
 $result = mysqli_query($mysqli,$sql);
 
 }

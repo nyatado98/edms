@@ -113,8 +113,10 @@ if (isset($_POST['login'])) {
                                      date_default_timezone_set('Africa/Nairobi');
                                      $login_time=strtotime("current");
                                      $login_time = date('Y/m/d  H:i:sa');
-                                     $query = "INSERT INTO logs (fullname,user_type,email,login_time,logout_time,total_time)VALUES ('".$row["fullname"]."','".$row["user_type"]."','$email','$login_time','','')";
+                                     $query = "INSERT INTO logs (user_id,fullname,user_type,email,login_time,logout_time,total_time)VALUES ('".$row["id"]."','".$row["fullname"]."','".$row["user_type"]."','$email','$login_time','','')";
                                      $result = mysqli_query($mysqli, $query);
+
+                                     $_SESSION['login_time'] = $login_time;
                               }
                             // Redirect user to index page
                             header("location:index.php");
