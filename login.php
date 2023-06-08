@@ -159,20 +159,27 @@ if (isset($_POST['btn_forgot_password'])) {
     }else{
         $sql = "SELECT * FROM users WHERE email = '".$_POST['emailreset']."'";
         $re = mysqli_query($mysqli,$sql);
+        
         $Count = mysqli_num_rows($re);
         if ($Count<1) {
             $emailerr = "The  email is not registered...Enter a valid email";
         }else{
         $emailreset = trim($_POST['emailreset']);
-
+        $sql = "SELECT * FROM users WHERE email = '$emailreset'";
+        $q = mysqli_query($mysqli,$sql);
+        while($row = $q->fetch_assoc()){
+            $row['id'] = $id;
+            $url = "<a href='reset'>localhost/edms/reset_pass?edit=$id</a>";
+          }
+         
   // $message=$_POST['message'];
 
   $mailto = $emailreset;
     $mailSub = 'EDMS Message';
     // $mailMsg = "".$message."";
-    $mailMsg = "here is your message";
+    $mailMsg = "Reset your passord by clicking the link below....";
 
-
+    
    
    $mail ->isSMTP();
    $mail ->SMTPDebug = 2;
@@ -185,8 +192,8 @@ if (isset($_POST['btn_forgot_password'])) {
    $mail ->Username = "17005d776171e1";
    $mail ->Password = "795f662ec6fcb0";
    $mail ->SetFrom("edms@gmail.com",'Developer Mailer');
-   $mail ->Subject = $mailSub;
-   $mail ->Body = $mailMsg;
+   $mail ->Subject = $mailMsg;
+   $mail ->Body = $url;
    $mail ->AddAddress($mailto);
 
    if($mail->Send())
@@ -241,7 +248,7 @@ if (isset($_POST['btn_forgot_password'])) {
 						<span class="text-danger"><?php echo $acc_err ;?></span><br>
 						<input type="submit" name="login" class="btn btn-primary" value="L O G I N">
 						<p>Forgot password <a href="#passwordReset" data-toggle="modal">Reset Here</a></p>
-                        <p>Signup Here <a href="register.php" >Register Here</a></p>
+                        <p>Signup Here <a href="register" >Register Here</a></p>
 					</div>
 					</form>
 		</div>

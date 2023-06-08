@@ -165,7 +165,7 @@ if(empty($typeerr) && empty($fullnameerr) && empty($emailerr) && empty($phone_no
 						<span class="text-danger"><?php echo $repassworderr ;?></span>
 						<span class="text-danger"><?php echo $err ;?></span><br>
 						<input type="submit" class="btn btn-primary form-control font-weight-bold" value="S I G N U P">
-						<p>If Already registered <a href="login.php">Login here</a></p>
+						<p>If Already registered <a href="login">Login here</a></p>
                     </div>
 					</form>
                 </div>

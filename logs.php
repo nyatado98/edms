@@ -43,7 +43,7 @@ if(isset($_POST['back'])){
     <table class="table table-striped table-bordered table-dark table-hover" id="logs">
         <thead>
             <tr>
-                <td><a href="index.php" class="btn btn-danger text-capitalize font-weight-bold" name="back">BACK</a></td>
+                <td><a href="index" class="btn btn-danger text-capitalize font-weight-bold" name="back">BACK</a></td>
                 <td><a href="" class="btn btn-light text-capitalize font-weight-bold">Clear Logs</a></td>
                 <td><a href="" class="btn btn-warning text-capitalize font-weight-bold">Export Logs</a></td>
             </tr>
