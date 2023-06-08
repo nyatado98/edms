@@ -93,7 +93,7 @@ if(empty($typeerr) && empty($fullnameerr) && empty($emailerr) && empty($phone_no
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                 // Redirect to login page
-                header("location:login.php");
+                header("location:login");
             } else{
                 echo "Something went wrong. Please try again later.";
             }

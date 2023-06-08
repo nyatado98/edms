@@ -8,7 +8,7 @@ $sql = "SELECT * FROM logs";
 $result = mysqli_query($conn,$sql);
 
 if(isset($_POST['back'])){
-    header("location:index.php");
+    header("location:index");
 }
 
 ?>

@@ -40,26 +40,32 @@ $row['login_time'] = $login_time;
 $row['logout_time'] = $logout_time;
 
 date_default_timezone_set('Africa/Nairobi');
-$row['login_time'] =new DateTime($row['login_time']);
-$row['logout_time'] =new DateTime($row['logout_time']);
+$row['login_time'] =strtotime($row['login_time']);
+$row['logout_time'] =strtotime($row['logout_time']);
+$dif = $row['logout_time'] - $row['login_time'] ;
+// $row['login_time'] =new DateTime($row['login_time']);
+// $row['logout_time'] =new DateTime($row['logout_time']);
 
-$total_time = $row['login_time']->diff($row['logout_time']);
+// $total_time = $row['login_time']->diff($row['logout_time']);
 // var_dump($total_time->format('%H'));
-$diff = $total_time->format('%s');
+// $diff = $total_time->format('%H%i%s');
 
-if($diff <= 60){
-    $dif = $diff .'Secs';
-}elseif($diff > 60){
-    $dif =($diff/60) .'Minutes';
-}elseif($diff >= 3600){
-    $dif = ($diff/3600). 'Hours';
+if($dif <= 60){
+    $diff = $dif . ' Secs';
+}elseif($dif > 60){
+    $diff =($dif/60) . ' Minutes';
+}elseif($dif >= 3600){
+    $diff = ($dif/3600). ' Hours';
+}
+elseif($dif >= 86400){
+    $diff = ($dif/86400). ' Days';
 }
 
-$sql = "UPDATE logs SET total_time ='$dif' WHERE login_time = '$login_time'";
+$sql = "UPDATE logs SET total_time ='$diff' WHERE login_time = '$login_time'";
 $result = mysqli_query($mysqli,$sql);
 
 }
-header("location:login.php");
+header("location:login");
 exit;
 
 

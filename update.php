@@ -2,7 +2,7 @@
 session_start();
 
 if(!isset($_SESSION["loggedin"]) && $_SESSION["email"] != true){
-    header("location:login.php");
+    header("location:login");
     exit;
 }
 
@@ -43,7 +43,7 @@ if (isset($_POST['save'])) {
 		if ($r) {
 				$_SESSION['success'] = $success;
 			$success = "Document updated successfully";
-		header("location:documents.php");
+		header("location:documents");
 		}
 	}
 	
@@ -82,22 +82,35 @@ if (isset($_POST['save'])) {
             <div class="collapse navbar-collapse" id="navbarNav">
            <ul class="navbar-nav mx-5">
                <li class="nav-item active">
-                    <a class="nav-link" href="index.PHP">HOME</a>
+                    <a class="nav-link" href="index">HOME</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="documents.php">DOCUMENTS</a>
+                    <a class="nav-link" href="documents">DOCUMENTS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="departments.php">DEPARTMENTS</a>
+                    <a class="nav-link" href="departments">DEPARTMENTS</a>
+                </li>
+				<?php 
+				$sql = "SELECT * FROM users WHERE email = '".$_SESSION['email']."'";
+				$query = mysqli_query($conn,$sql);
+while($row=$query->fetch_assoc()) {
+    if($row['user_type'] == 'SupperAdmin') {
+        ?>
+					<li class="nav-item">
+                    <a class="nav-link" href="users">USERS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="users.php">USERS</a>
+                    <a class="nav-link" href="logs">SYSTEM LOGS</a>
                 </li>
+				<?php
+
+} else {
+
+}
+}
+			?>
                 <li class="nav-item">
-                    <a class="nav-link" href="settings.php">SETTINGS</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="logout.php">LOGOUT</a>
+                    <a class="nav-link" href="logout">LOGOUT</a>
                 </li>
             </ul>
 </div>
