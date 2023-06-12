@@ -28,6 +28,20 @@ if (!$conn) {
 			$message = "Something went wrong please try again";
 		}
 	}
+
+	//update users details
+// 	if (isset($_POST['edit'])) {
+// 	$fullname = trim($_POST['fullname']);
+// 	$email = trim($_POST['email']);
+// 	$phone_no = trim($_POST['phone_no']);
+// 	$password = password_hash(trim($_POST['password']),PASSWORD_DEFAULT); //hash password
+
+// 	$sql = "UPDATE users SET fullname = '$fullname', email = '$email', phone_no= '$phone_no', password='$password' WHERE id='$id'";
+// 	$result = mysqli_query($conn,$sql);
+// 	if ($result) {
+// 		$message = "User details updated successfully";
+// 	}
+// }
 ?>
 <!DOCTYPE html>
 <html>
@@ -148,7 +162,9 @@ while($row=$query->fetch_assoc()) {
 							      		<input type="email" name="email" class="form-control" value="<?php echo $rows['email'];?>
 							      		">
 							      		<label class="font-weight-bold">Phone number :</label>
+							            
 							            <input type="number" name="phone_no" class="form-control" value="<?php echo $rows['phone_no'];?>">
+							            <input type="password" name="password" class="form-control" value="<?php echo $rows['password'];?>">
 							      		
 							      	</div>
 							      <div class="modal-footer">
