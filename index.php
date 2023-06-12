@@ -102,12 +102,13 @@ if (isset($_POST['upload'])) {
 			 move_uploaded_file($tmp_name,$target.$name);
 			$message = "Document successfully Addded";
 			unset($_POST['upload']);
-			header("location:index.php");
+			header("location:index");
 		}else{
 			$messageerr = "Document could not be added";
 		}
 	}
-	$conn->close();
+	//this one was bringing an error on line 169 the connection is closed
+	// $conn->close();
 
 }
 //delete document
@@ -117,7 +118,7 @@ if (isset($_GET['del'])) {
 	$sql = "DELETE FROM documents WHERE document_name = '$document_name'";
 	$r = mysqli_query($conn,$sql);
 	if ($r) {
-		header("location:index.php?document deleted");
+		header("location:index?document deleted");
 		unset($document_name);
 	}
 	
@@ -252,9 +253,9 @@ if (isset($_POST['search'])) {
     				<form method="post" action="">
     				<div class="row">
     					
-    					<a href="index.php?del=<?php (!isset($_POST['search']))? print_r(""): print_r($document_name);?>" onClick="return confirm('Are you sure you want do delete?')" name="del"><buttton class="btn btn-danger font-weight-bold" >Delete</buttton></a>
-    					<a href="index.php?print=<?php echo $docname;?>" name="print"><buttton class="btn btn-primary font-weight-bold mx-2" >Print</buttton></a>
-    					<a href="index.php?export=<?php echo $docname;?>" name="export"><buttton class="btn btn-warning mx-2 font-weight-bold" >Export</buttton></a>
+    					<a href="index?del=<?php (!isset($_POST['search']))? print_r(""): print_r($document_name);?>" onClick="return confirm('Are you sure you want do delete?')" name="del"><buttton class="btn btn-danger font-weight-bold" >Delete</buttton></a>
+    					<a href="index?print=<?php echo $docname;?>" name="print"><buttton class="btn btn-primary font-weight-bold mx-2" >Print</buttton></a>
+    					<a href="index?export=<?php echo $docname;?>" name="export"><buttton class="btn btn-warning mx-2 font-weight-bold" >Export</buttton></a>
     				</div>
     			</form>
     			</div>
