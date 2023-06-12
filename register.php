@@ -1,9 +1,13 @@
 <?php
+session_start();
+
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 define('DB_NAME', 'edms');
  
+$_SESSION['token'] = bin2hex(random_bytes(35));
+
 /* Attempt to connect to MySQL database */
 $mysqli = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
  
@@ -16,7 +20,16 @@ $typeerr = $fullnameerr = $emailerr = $phone_noerr = $passworderr = $repassworde
 
 $user_type = $fullname = $email = $phone_no = $password = $repassword ="";
 
+$token = $_SESSION['token'];
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if (!$token || $token !== $_SESSION['token']) {
+    // show an error message
+    echo '<p class="error">Error: invalid form submission</p>';
+    // return 405 http status code
+    header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+    exit;
+}else{
+
     if(empty(trim($_POST["user_type"]))){
         $typeerr = "Please select user type.";
     } else{
@@ -104,6 +117,7 @@ if(empty($typeerr) && empty($fullnameerr) && empty($emailerr) && empty($phone_no
         $mysqli->close();
     }
     }
+}
  ?>
 
 
@@ -132,6 +146,8 @@ if(empty($typeerr) && empty($fullnameerr) && empty($emailerr) && empty($phone_no
 	<div class="container col-md-8 mt-5">
         <div class="card">
 					<form class="log-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                      <input type="hidden" name="token" value="<?= $_SESSION['token'] ?? '' ?>" >
+
 						<div class="card-header col-md-12">
 			              <!-- <img src="1.jfif" class="img-fluid" alt=""> -->
                           <h4 class="text-center font-weight-bold">Fill The Fields Below</h4>

@@ -59,6 +59,9 @@ header("location:documents.php?document deleted successfully");
 <html>
 <head>
 	<title>EDMS DOCUMENTS PAGE</title>
+	<link rel="stylesheet" type="text/css" href="DataTables/DataTables-1.13.4/css/jquery.dataTables.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script type="text/javascript" src="DataTables/DataTables-1.13.4/js/jquery.dataTables.js"></script>
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <style>
@@ -128,12 +131,9 @@ while($row=$query->fetch_assoc()) {
     </nav>
 
 	<div class="container-fluid">
-<div class="table-responsive">
-	<table class="table table-striped table-bordered table-dark table-hover ">
-		<thead>
-			<tr>
-				<th colspan="9" class="font-weight-bold text-center">All System Documents</th>
-			</tr>
+		<div>
+				<h4 class="text-center font-weight-bold text-center">All System Documents</h4>
+			</div>
 			<tr>
 				<th class="font-weight-bold text-center"><a href="index.php"><button class="btn btn-success font-weight-bold">Back To Dashboard</button></a></th>
 				<th colspan="8"><span class=""><?php 
@@ -144,14 +144,21 @@ echo '<div class="text-danger font-weight-bold">'.$err.'</div>';
 			</th>
 
 			</tr>
-			<tr>
-				<td class="font-weight-bold text-center">#</td>
-				<td class="font-weight-bold text-center">Document Name</td>
-				<td class="font-weight-bold text-center">Document Department</td>
-				<td class="font-weight-bold text-center">Document Sub-department</td>
-				<td class="font-weight-bold text-center">Document Description</td>
-				<td class="font-weight-bold text-center" colspan="4">Actions</td>
-			</tr>
+<div class="table-responsive">
+	<table class="table table-striped table-bordered table-dark table-hover " id="sample">
+		<thead>
+			
+				<th class="font-weight-bold text-center">#</th>
+				<th class="font-weight-bold text-center">Document Name</th>
+				<th class="font-weight-bold text-center">Document Department</th>
+				<th class="font-weight-bold text-center">Document Sub-department</th>
+				<th class="font-weight-bold text-center">Document Description</th>
+				<th class="font-weight-bold text-center text-secondary">View</th>
+				<th class="font-weight-bold text-center text-primary">Update</th>
+				<th class="font-weight-bold text-center text-warning">Print</th>
+				<th class="font-weight-bold text-center text-danger">Delete</th>
+
+			
 		</thead>
 		<tbody>
 			<?php 
@@ -179,4 +186,11 @@ echo '<div class="text-danger font-weight-bold">'.$err.'</div>';
 <script src="bootstrap/jquery/jquery-3.5.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="bootstrap/popper/popper.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script type="text/javascript" src="DataTables/DataTables-1.13.4/js/jquery.dataTables.js"></script>
+<script>
+jQuery(document).ready(function($) {
+    $('#sample').DataTable();
+} );
+</script>
 </html>
