@@ -10,7 +10,7 @@ $conn = mysqli_connect('localhost','root','','edms');
 if (!$conn) {
 	die("Could not connect to the database");
 }
-$success = "";
+$success = $err =  "" ;
 
     $sql = "SELECT * FROM departments";
 	$re = mysqli_query($conn,$sql);
@@ -42,7 +42,9 @@ if (isset($_POST['save'])) {
 		$r = mysqli_query($conn,$sql);
 		if ($r) {
 				$_SESSION['success'] = $success;
+				$_SESSION['err'] = $err;
 			$success = "Document updated successfully";
+			$err = "";
 		header("location:documents");
 		}
 	}
@@ -90,7 +92,7 @@ if (isset($_POST['save'])) {
                 <li class="nav-item">
                     <a class="nav-link" href="departments">DEPARTMENTS</a>
                 </li>
-				<?php 
+						<?php 
 				$sql = "SELECT * FROM users WHERE email = '".$_SESSION['email']."'";
 				$query = mysqli_query($conn,$sql);
 while($row=$query->fetch_assoc()) {
@@ -113,6 +115,14 @@ while($row=$query->fetch_assoc()) {
                     <a class="nav-link" href="logout">LOGOUT</a>
                 </li>
             </ul>
+            	<div class="dropdown">
+			<a class="font-weight-bold dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="" style="text-decoration:none;color:teal"><?php echo $_SESSION['email'];?>  <i class="fa fa-user" style="color:white;font-size:20px"></i></a>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="settings">Settings</a>
+    <a class="dropdown-item" href="profile">Profile</a>
+    <a class="dropdown-item" href="logout">Logout</a>
+  </div>
+</div>
 </div>
     </nav>
     <div class="container">

@@ -90,6 +90,14 @@ while($row=$query->fetch_assoc()) {
                     <a class="nav-link" href="logout.php">LOGOUT</a>
                 </li>
             </ul>
+            	<div class="dropdown">
+			<a class="font-weight-bold dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="" style="text-decoration:none;color:teal"><?php echo $_SESSION['email'];?>  <i class="fa fa-user" style="color:white;font-size:20px"></i></a>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="settings">Settings</a>
+    <a class="dropdown-item" href="profile">Profile</a>
+    <a class="dropdown-item" href="logout">Logout</a>
+  </div>
+</div>
 </div>
     </nav>
     <div class="container-fluid">

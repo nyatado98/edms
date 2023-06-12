@@ -7,9 +7,10 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["email"] != true){
 
 if (isset($_SESSION['success'])) {
 	$success = "Document updated successfully";
+	$err = "";
 	unset($_SESSION['success']);
 }else{
-	$success = "";
+	$success = $err = $user_type = "";
 }
 $conn = mysqli_connect('localhost','root','','edms');
 if (!$conn) {
@@ -27,6 +28,14 @@ if (isset($_GET['delete'])) {
 	while ($ro = $req->fetch_assoc()) {
 		$document_name = $ro['document_name'];
 	}
+	$sql = "SELECT * FROM users WHERE email = '".$_SESSION["email"]."'";
+	$query = mysqli_query($conn,$sql);
+	while($r = $query->fetch_assoc()){
+		$r['user_type'] = $user_type;
+	}
+	if ($user_type != 'SupperAdmin') {
+		$err = "You don't have rights to delete this document";
+	}else{
 	$sql = "DELETE FROM documents WHERE id ='$id'";
 	$r = mysqli_query($conn,$sql);
 	if ($r) {
@@ -43,6 +52,7 @@ header("location:documents.php?document deleted successfully");
 	}else{
 		echo "document could not be deleted...problem occured";
 	}
+}
 }
 ?>
 <!DOCTYPE html>
@@ -83,7 +93,7 @@ header("location:documents.php?document deleted successfully");
                 <li class="nav-item">
                     <a class="nav-link" href="departments">DEPARTMENTS</a>
                 </li>
-				<?php 
+					<?php 
 				$sql = "SELECT * FROM users WHERE email = '".$_SESSION['email']."'";
 				$query = mysqli_query($conn,$sql);
 while($row=$query->fetch_assoc()) {
@@ -106,6 +116,14 @@ while($row=$query->fetch_assoc()) {
                     <a class="nav-link" href="logout">LOGOUT</a>
                 </li>
             </ul>
+            	<div class="dropdown">
+			<a class="font-weight-bold dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="" style="text-decoration:none;color:teal"><?php echo $_SESSION['email'];?>  <i class="fa fa-user" style="color:white;font-size:20px"></i></a>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="settings">Settings</a>
+    <a class="dropdown-item" href="profile">Profile</a>
+    <a class="dropdown-item" href="logout">Logout</a>
+  </div>
+</div>
 </div>
     </nav>
 
@@ -118,7 +136,12 @@ while($row=$query->fetch_assoc()) {
 			</tr>
 			<tr>
 				<th class="font-weight-bold text-center"><a href="index.php"><button class="btn btn-success font-weight-bold">Back To Dashboard</button></a></th>
-				<th colspan="8"><span class="text-success font-weight-bold"><?php echo $success;?></th>
+				<th colspan="8"><span class=""><?php 
+				echo '<div class="text-success font-weight-bold">'.$success.'</div>';
+echo '<div class="text-danger font-weight-bold">'.$err.'</div>';
+?>
+</span>
+			</th>
 
 			</tr>
 			<tr>

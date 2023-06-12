@@ -56,16 +56,37 @@ if (isset($_GET['view'])) {
                 <li class="nav-item">
                     <a class="nav-link" href="departments">DEPARTMENTS</a>
                 </li>
-                <li class="nav-item">
+                    <?php 
+                $sql = "SELECT * FROM users WHERE email = '".$_SESSION['email']."'";
+                $query = mysqli_query($conn,$sql);
+while($row=$query->fetch_assoc()) {
+    if($row['user_type'] == 'SupperAdmin') {
+        ?>
+                    <li class="nav-item">
                     <a class="nav-link" href="users">USERS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="settings">SETTINGS</a>
+                    <a class="nav-link" href="logs">SYSTEM LOGS</a>
                 </li>
+                <?php
+
+} else {
+
+}
+}
+            ?>
                 <li class="nav-item">
                     <a class="nav-link" href="logout">LOGOUT</a>
                 </li>
             </ul>
+                <div class="dropdown">
+            <a class="font-weight-bold dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="" style="text-decoration:none;color:teal"><?php echo $_SESSION['email'];?>  <i class="fa fa-user" style="color:white;font-size:20px"></i></a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="settings">Settings</a>
+    <a class="dropdown-item" href="profile">Profile</a>
+    <a class="dropdown-item" href="logout">Logout</a>
+  </div>
+</div>
 </div>
     </nav>
     <div class="container">
