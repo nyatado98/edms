@@ -169,7 +169,7 @@ if (isset($_POST['btn_forgot_password'])) {
         $q = mysqli_query($mysqli,$sql);
         while($row = $q->fetch_assoc()){
             $row['id'] = $id;
-            $url = "<a href='reset'>localhost/edms/reset_pass?edit=</a>";
+            $url = '<a href="reset">localhost/edms/reset_pass?edit=$row["id"]=</a>';
           }
          
   // $message=$_POST['message'];
