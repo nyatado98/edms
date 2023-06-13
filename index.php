@@ -14,6 +14,9 @@ if (!$conn) {
 $sql = "SELECT * FROM departments";
 $res = mysqli_query($conn,$sql);
 
+$sql = "SELECT * FROM departments";
+$ress = mysqli_query($conn,$sql);
+
 $sql = "SELECT * FROM sub_departments";
 $result = mysqli_query($conn,$sql);
 
@@ -206,8 +209,17 @@ while($row=$query->fetch_assoc()) {
     				while($r = $res->fetch_assoc()){
     					?>
     				<div class="column" style="border-bottom: .1px solid white;">
-
-    				<a href="#" style="color: white;text-decoration: none;font-size:20px;" class="font-weight-bold"><?php echo $r['departmentName'];?></a>
+    					<div class="row dropdown mx-auto justify-content-between">
+    				<a href="#" id="dropdown" data-toggle="collapse" data-target="#new" aria-haspopup="true" aria-expanded="false" style="color: white;text-decoration: none;font-size:20px;" class="font-weight-bold m-2"><?php echo $r['departmentName'];?></a>
+    				<div class="sub-menu collapse btn-white" aria-labelledby="dropdown" id="new">
+    <a class="dropdown-item" href="settings">Settings</a>
+    <a class="dropdown-item" href="profile">Profile</a>
+    <a class="dropdown-item" href="logout">Logout</a>
+  </div>
+    				<a href="">
+    				<i class="fa fa-arrow-down mt-2" style="color:whitesmoke;font-size: 17px;"></i>
+    			</a>
+    			</div>
     				</div>
     			<?php } ?>
     			</div>
@@ -293,7 +305,7 @@ if (isset($_POST['search'])) {
     					<select name="department" class="form-control">
     						<option value="">-select department-</option>
     						<?php 
-    						while ($rows = $res->fetch_assoc()) {
+    						while ($rows = $ress->fetch_assoc()) {
     						?>
     						<option><?php echo $rows['departmentName'];?></option>
     						<?php 
