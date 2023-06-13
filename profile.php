@@ -34,7 +34,7 @@ if (isset($_POST['update'])) {
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Profile page</title>
+	<title>User Profile page</title>
 	<style type="text/css">
     	header{
     		background: url(ccms.jpg);
