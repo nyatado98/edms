@@ -200,20 +200,32 @@ while($row=$query->fetch_assoc()) {
     </nav>
     
     	<div class="container-fluid mb-2">
+    		<div class="row">
+    			<div class="col-md-3 bg-dark">
+    				<?php 
+    				while($r = $res->fetch_assoc()){
+    					?>
+    				<div class="column" style="border-bottom: .1px solid white;">
+
+    				<a href="#" style="color: white;text-decoration: none;font-size:20px;" class="font-weight-bold"><?php echo $r['departmentName'];?></a>
+    				</div>
+    			<?php } ?>
+    			</div>
+    			<div class="col-md-6">
     		<h4 class="font-weight-bold m-2">Search Your Document Here</h4>
     		
     		<form method="post" action="">
     			<span class="text-danger font-weight-bold"><?php echo $docerr;?></span>
     			<span class="text-danger font-weight-bold"><?php echo $err;?></span>
     		<div class="row m-2">
-    		<input type="text" name="docname" placeholder="Enter the document name" class="col-md-5 form-control mb-2">
+    		<input type="text" name="docname" placeholder="Enter the document name" style="border-radius: 0%;border-color: gray;" class="col-md-8 form-control mb-2">
     		<input type="submit" name="search" class="btn btn-primary col-md-3 mx-1 font-weight-bold text-dark" value="SEARCH">
     	</div>
     </form>
-    	</div>
-    	<div class="container-fluid">
-    	<div class="row">
-    		<div class="col-md-7">
+    	<!-- </div> -->
+    	<!-- <div class="container-fluid">
+    	<div class="row"> -->
+    		<!-- <div class="col-md-7"> -->
     		<div class="card mb-2">
     			<div class="card-header">
     				<h4 class="font-weight-bold text-center text-dark">View Your Documents Here</h4>
@@ -261,7 +273,7 @@ if (isset($_POST['search'])) {
     			</div>
     		</div>
     	</div>
-    		<div class="col-md-4">
+    		<div class="col-md-3">
     		<div class="card mx-auto mb-2">
     			<div class="card-header">
     				<h4 class="text-center text-dark font-weight-bold">Add New Documents Here</h4>
