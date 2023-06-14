@@ -15,7 +15,7 @@ require 'vendor/autoload.php';
 
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) AND $_SESSION["email"] == true){
-    header("location:index.php");
+    header("location:index");
     exit;
 }
 
@@ -159,7 +159,10 @@ if (isset($_POST['btn_forgot_password'])) {
     }else{
         $sql = "SELECT * FROM users WHERE email = '".$_POST['emailreset']."'";
         $re = mysqli_query($mysqli,$sql);
-        
+        // while($row=$re->fetch_assoc()){
+        //   $row['id'] = $id;
+        //   $url = $id;
+        // }
         $Count = mysqli_num_rows($re);
         if ($Count<1) {
             $emailerr = "The  email is not registered...Enter a valid email";
@@ -169,7 +172,7 @@ if (isset($_POST['btn_forgot_password'])) {
         $q = mysqli_query($mysqli,$sql);
         while($row = $q->fetch_assoc()){
             $row['id'] = $id;
-            $url = '<a href="reset">localhost/edms/reset_pass?edit=$row["id"]=</a>';
+            $url = '<a href="localhost/edms/reset_pass?edit='.$id.'">Reset here</a>';
           }
          
   // $message=$_POST['message'];
@@ -199,9 +202,9 @@ if (isset($_POST['btn_forgot_password'])) {
    if($mail->Send())
    {
      $message= "Mail Sent";
-     header("location:login.php?email sent");
+     header("location:login?email sent");
    }else{
-     header("location:login.php?email not sent");
+     header("location:login?email not sent");
    }
     }
     }

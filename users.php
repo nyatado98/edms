@@ -19,8 +19,8 @@ if (!$conn) {
 		$fullname = $_POST['fullname'];
 		$email = $_POST['email'];
 		$phone_no = $_POST['phone_no'];
-
-		$sql = "UPDATE users SET fullname = '$fullname', email = '$email', phone_no = '$phone_no' WHERE id='$id'";
+		$password = password_hash(trim($_POST['password']),PASSWORD_DEFAULT); //hash password
+		$sql = "UPDATE users SET fullname = '$fullname', email = '$email', phone_no = '$phone_no', password='$password' WHERE id='$id'";
 		$query =mysqli_query($conn,$sql);
 		if($query){
 			$message = "User successfully updated";
