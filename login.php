@@ -258,7 +258,7 @@ if (isset($_POST['btn_forgot_password'])) {
 	</div>
 </body>
 
-    <div class="modal fade" id="passwordReset" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="passwordReset" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <form method="POST">
@@ -289,6 +289,7 @@ if (isset($_POST['btn_forgot_password'])) {
   </div>
     </div>
   </div>
+    </body>
 <script src="bootstrap/jquery/jquery-3.5.1.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="bootstrap/popper/popper.min.js"></script> 

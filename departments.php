@@ -266,7 +266,7 @@ while($row=$query->fetch_assoc()) {
     						<tr>
     						<td class="text-center"><?php echo $row['id'];?></td>
     						<td class="text-center" id="name"><?php echo $row['departmentName'];?></td>
-    						<td class="text-center"><a href="departments.php?edit=<?php echo $row['id'];?>" id="edit" name="edit" data-toggle="modal" data-target="#exampleModal<?php echo $row['id'];?>" class="btn btn-primary">Edit</a></td>
+    						<td class="text-center"><a href="departments?edit=<?php echo $row['id'];?>" id="edit" name="edit" data-toggle="modal" data-target="#exampleModal<?php echo $row['id'];?>" class="btn btn-primary">Edit</a></td>
     						<td class="text-center"><a href="#" class="btn btn-danger" onClick="return confirm('Are you sure you want do delete? Department <?php echo $row['departmentName'];?>')">Delete</a></td>
     					</tr>
     					<!-- Edit Department details Modal -->
