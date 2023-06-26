@@ -162,53 +162,52 @@ echo '<div class="text-danger font-weight-bold">'.$err.'</div>';
 		</thead>
 		<tbody>
 			<?php 
-			while ($rows=$res->fetch_assoc()) {
-			?>
+while ($rows=$res->fetch_assoc()) {
+    ?>
 			<tr>
 				<td class="font-weight-bold text-center"><?php echo $rows['id']?></td>
 				<td class="font-weight-bold text-center"> <?php echo $rows['document_name']?></td>
 				<td class="font-weight-bold text-center"> <?php echo $rows['document_department']?></td>
 				<td class="font-weight-bold text-center"> <?php echo $rows['document_sub_department']?></td>
 				<td class="font-weight-bold text-center"> <?php echo $rows['document_description']?></td>
-				<td class="font-weight-bold text-center"><a href="documents?view=<?php echo $rows['id'];?>"data-toggle="modal" data-target="#exampleModal<?php echo $row['id'];?>" name="view"><button class="btn btn-secondary font-weight-bold"> View</button></a></td>
+				<td class="font-weight-bold text-center"><a href="viewdoc?view=<?php echo $rows['id'];?>"  name="view" class="btn btn-secondary font-weight-bold"> View</a></td>
 				<td class="font-weight-bold text-center"><a href="update?update=<?php echo $rows['id'];?>" name="update"><button name="update" class="btn btn-primary font-weight-bold"> Update</button></a></td>
 				<td class="font-weight-bold text-center"><a href="documents?print=<?php echo $rows['id'];?>" name="print"><button class="btn btn-warning font-weight-bold"> Print</button></a></td>
 				<td class="font-weight-bold text-center"><a href="documents?delete=<?php echo $rows['id'];?>" onClick="return confirm('Are you sure you want do delete?')" name="delete"><buttton class="btn btn-danger font-weight-bold" >Delete</buttton></a></td>
 
 			</tr>
-		<?php }
-		?>
+			<!-- data-toggle="modal" data-target="#Modal<?php echo $rows['id'];?>" -->
+			<!-- view document modal -->
+<div class="modal fade" id="Modal<?php echo $rows['id'];?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title text-dark" id="exampleModalLabel">Edit Sub-department</h5>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="modal-body">
+									<div class="col-md-10">
+							      	<form method="post" action="">
+							      	<iframe src="<?php echo 'document_files/'.$rows['document_file'];?>" frameborder="0"></iframe>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                 
+							        <a href="departments.php" name="change"><input type="submit" name="change" value="Edit" class="btn btn-primary"></a>
+								  </div>
+							        </form>
+                                </div>
+                            </div>
+								</div>
+                        </div>
+                    </div>
+		<?php } ?>
 		</tbody>
 	</table>
 </div>
 </div>
-<!-- view document modal -->
-<div class="modal fade" id="exampleModal<?php echo $rows['id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <form method="POST">
-        <div class="modal-header" style="background: #398AD7; color: #fff;"><!--398AD7--><!--08B6CE-->
-  
-        <h5></h5>
-      </div>
 
-      <div class="modal-body">
-        <div class="form-group">
-        
-        <div class="form-group">
-				<iframe src="" frameborder="0"></iframe>
-        </div>
-
-    <div class="modal-footer">
-      <button type="submit" name="btn_forgot_password" class="btn btn-primary">Reset Password</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        
-      </div>
-
-    </form>
-  </div>
-    </div>
-  </div>
 </body>
 <script src="bootstrap/jquery/jquery-3.5.1.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
