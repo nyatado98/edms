@@ -210,12 +210,10 @@ while($row=$query->fetch_assoc()) {
     					?>
     				<div class="column" style="border-bottom: .1px solid white;">
     					<div class="row dropdown mx-auto justify-content-between">
-    				<a href="#" id="dropdown" data-toggle="collapse" data-target="#new" aria-haspopup="true" aria-expanded="false" style="color: white;text-decoration: none;font-size:20px;" class="font-weight-bold m-2"><?php echo $r['departmentName'];?></a>
-    				<div class="sub-menu collapse btn-white" aria-labelledby="dropdown" id="new">
-    <a class="dropdown-item" href="settings">Settings</a>
-    <a class="dropdown-item" href="profile">Profile</a>
-    <a class="dropdown-item" href="logout">Logout</a>
-  </div>
+    				<a href="#" id="dropdown" data-target="#new" data-toggle="collapse" style="color: white;text-decoration: none;font-size:20px;" class="collapsed font-weight-bold m-2"><?php echo $r['departmentName'];?></a>
+					<p class="sub-menu collapse" id="new">
+                  <a href="">Sub departments</a>
+					</p>
     				<a href="">
     				<i class="fa fa-arrow-down mt-2" style="color:whitesmoke;font-size: 17px;"></i>
     			</a>
