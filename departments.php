@@ -111,7 +111,7 @@ if (isset($_POST['edit'])) {
 		$query = mysqli_query($conn,$sql);
 		if ($query) {
 			$message = "Department updated Successfully";
-			header("location:departments.php");
+			header("location:departments");
 		}
 	}
 // unset($_POST['edit']);
@@ -294,7 +294,7 @@ while($row=$query->fetch_assoc()) {
 							      <div class="modal-footer">
 							        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                  
-							        <a href="departments.php" name="edit"><input type="submit" name="edit" value="Edit" class="btn btn-primary"></a>
+							        <a href="departments" name="edit"><input type="submit" name="edit" value="Edit" class="btn btn-primary"></a>
 							        </form>
 
                                 </div>
@@ -352,7 +352,7 @@ while($row=$query->fetch_assoc()) {
 							      <div class="modal-footer">
 							        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                  
-							        <a href="departments.php" name="change"><input type="submit" name="change" value="Edit" class="btn btn-primary"></a>
+							        <a href="departments" name="change"><input type="submit" name="change" value="Edit" class="btn btn-primary"></a>
 							        </form>
                                 </div>
                             </div>

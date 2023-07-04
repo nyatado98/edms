@@ -172,7 +172,8 @@ if (isset($_POST['btn_forgot_password'])) {
         $q = mysqli_query($mysqli,$sql);
         while($row = $q->fetch_assoc()){
             $row['id'] = $id;
-            $url = '<a href="localhost/edms/reset_pass?edit='.$id.'">Reset here</a>';
+            // <a href="localhost/edms/reset_pass?edit='.$id.'">Reset here</a>
+            $url =$id;
           }
          
   // $message=$_POST['message'];
@@ -202,9 +203,10 @@ if (isset($_POST['btn_forgot_password'])) {
    if($mail->Send())
    {
      $message= "Mail Sent";
-     header("location:login?email sent");
+     header("location:login?".$message);
    }else{
-     header("location:login?email not sent");
+    $message = "Mail not sent";
+     header("location:login?".$message);
    }
     }
     }

@@ -24,6 +24,7 @@ if (!$conn) {
 		$query =mysqli_query($conn,$sql);
 		if($query){
 			$message = "User successfully updated";
+			header("location:users");
 		}else{
 			$message = "Something went wrong please try again";
 		}
@@ -170,7 +171,7 @@ while($row=$query->fetch_assoc()) {
 							      <div class="modal-footer">
 							        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                  
-							        <a href="users.php" name="edit"><input type="submit" name="edit" value="Update" class="btn btn-primary"></a>
+							        <a href="users" name="edit"><input type="submit" name="edit" value="Update" class="btn btn-primary"></a>
 							        </form>
 
                                 </div>

@@ -135,6 +135,7 @@ if (isset($_GET['del'])) {
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="side.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style type="text/css">
     	header{
@@ -205,12 +206,12 @@ while($row=$query->fetch_assoc()) {
     	<div class="container-fluid mb-2">
     		<div class="row">
     			<div class="col-md-3 bg-dark">
-    				<?php 
-    				while($r = $res->fetch_assoc()){
-    					?>
-    				<div class="column" style="border-bottom: .1px solid white;">
+    				
+    				<!-- <div class="column" style="border-bottom: .1px solid white;">
     					<div class="row dropdown mx-auto justify-content-between">
-    				<a href="#" id="dropdown" data-target="#new" data-toggle="collapse" style="color: white;text-decoration: none;font-size:20px;" class="collapsed font-weight-bold m-2"><?php echo $r['departmentName'];?></a>
+    				<a href="#" id="dropdown" data-target="#new" data-toggle="collapse" style="color: white;text-decoration: none;font-size:20px;" class="collapsed font-weight-bold m-2">
+						<?php echo $r['departmentName'];?>
+					</a>
 					<p class="sub-menu collapse" id="new">
                   <a href="">Sub departments</a>
 					</p>
@@ -218,10 +219,72 @@ while($row=$query->fetch_assoc()) {
     				<i class="fa fa-arrow-down mt-2" style="color:whitesmoke;font-size: 17px;"></i>
     			</a>
     			</div>
-    				</div>
-    			<?php } ?>
+    				</div> -->
+					<nav id="sidebar">
+            <div class="sidebar-header">
+                <h3 class="text-white font-weight-bold text-center" style="text-decoration:underline">Departments</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+				<?php while($row = $ress->fetch_assoc()){
+					?>
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><?php echo $row['departmentName'];?></a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">Home 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="#">Page 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Portfolio</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+				<?php } ?>
+            </ul>
+			
+
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="settings" class="download">Settings</a>
+                </li>
+                <li>
+                    <a href="logout" class="article">Log out</a>
+                </li>
+            </ul>
+        </nav>
+
     			</div>
     			<div class="col-md-6">
+				<button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>Toggle Sidebar</span>
+                    </button>
     		<h4 class="font-weight-bold m-2">Search Your Document Here</h4>
     		
     		<form method="post" action="">
@@ -341,4 +404,11 @@ if (isset($_POST['search'])) {
     <script src="bootstrap/jquery/jquery-3.5.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="bootstrap/popper/popper.min.js"></script>
+	<script src="" type="text/javascript">
+		$(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+	</script>
 </html>
