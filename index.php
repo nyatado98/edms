@@ -230,6 +230,7 @@ while($row=$query->fetch_assoc()) {
 					?>
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle font-weight-bold text-dark"><?php echo $row['departmentName'];?></a>
+					<?php } ?>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
 					
 						
@@ -244,7 +245,7 @@ while($row=$query->fetch_assoc()) {
                         </li>
                     </ul>
                 </li>
-				<?php } ?>
+				
             </ul>
 			
 
