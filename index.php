@@ -1,6 +1,6 @@
 <?php 
 session_start();
-
+$email = $_SESSION['email'];
 if(!isset($_SESSION["loggedin"]) && $_SESSION["email"] != true){
     header("location:login");
     exit;
@@ -205,7 +205,7 @@ while($row=$query->fetch_assoc()) {
     
     	<div class="container-fluid mb-2">
     		<div class="row">
-    			<div class="col-md-3 bg-dark">
+    			<!-- <div class="col-md-3 bg-dark"> -->
     				
     				<!-- <div class="column" style="border-bottom: .1px solid white;">
     					<div class="row dropdown mx-auto justify-content-between">
@@ -220,7 +220,7 @@ while($row=$query->fetch_assoc()) {
     			</a>
     			</div>
     				</div> -->
-					<nav id="sidebar">
+			<!-- 		<nav id="sidebar">
             <div class="sidebar-header">
                 <h3 class="text-white font-weight-bold text-center" style="text-decoration:underline">Departments</h3>
             </div>
@@ -230,6 +230,7 @@ while($row=$query->fetch_assoc()) {
 					?>
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle font-weight-bold text-dark"><?php echo $row['departmentName'];?></a>
+					<?php } ?>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
 					
 						
@@ -244,7 +245,7 @@ while($row=$query->fetch_assoc()) {
                         </li>
                     </ul>
                 </li>
-				<?php } ?>
+				
             </ul>
 			
 
@@ -256,10 +257,10 @@ while($row=$query->fetch_assoc()) {
                     <a href="logout" class="article">Log out</a>
                 </li>
             </ul>
-        </nav>
+        </nav> -->
 
-    			</div>
-    			<div class="col-md-6">
+    			<!-- </div> -->
+    			<div class="col-md-8">
 				<button type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
                         <span>Toggle Sidebar</span>
@@ -310,7 +311,16 @@ if (isset($_POST['search'])) {
     			<!-- <img style="height: 500px" src="<?php echo 'document_files/' .$row['document_file'];?>"alt="" class="img-fluid" width="800px"> -->
     			<iframe style="height: 500px;width: 800px" src="<?php echo 'document_files/'.$row['document_file'];?>" class="img-fluid"></iframe>
     			</div>
-    		<?php }}}
+    		<?php }}
+    		// else{
+    			
+    			
+    		}
+    	}
+    	
+    	else{?>
+    		<img src="document_files/empty.gif" class="img-fluid" style="height: 600px;">
+    			<?php
     	}
     		?>
     			<div class="card-footer">
@@ -325,7 +335,7 @@ if (isset($_POST['search'])) {
     			</div>
     		</div>
     	</div>
-    		<div class="col-md-3">
+    		<div class="col-md-4">
     		<div class="card mx-auto mb-2">
     			<div class="card-header">
     				<h4 class="text-center text-dark font-weight-bold">Add New Documents Here</h4>

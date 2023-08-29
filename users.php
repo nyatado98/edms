@@ -14,13 +14,23 @@ if (!$conn) {
 	$result = mysqli_query($conn,$sql);
 	//edit a spesific user
 	$message = "";
+	$error = "";
 	if(isset($_POST['edit'])){
 		$id = $_POST['id'];
+		$sql = "SELECT * FROM users WHERE id = '$id'";
+		$result = mysqli_query($conn,$sql);
+		while($r = $result->fetch_assoc()){
+			if ($r['fullname'] == $_POST['fullname'] && $r['email'] == $_POST['email'] && $r['phone_no'] == $_POST['phone_no']) {
+				header("location:users");
+				$error = "No changes made";
+			}else{
+		
 		$fullname = $_POST['fullname'];
 		$email = $_POST['email'];
 		$phone_no = $_POST['phone_no'];
-		$password = password_hash(trim($_POST['password']),PASSWORD_DEFAULT); //hash password
-		$sql = "UPDATE users SET fullname = '$fullname', email = '$email', phone_no = '$phone_no', password='$password' WHERE id='$id'";
+		// $password = password_hash(trim($_POST['password']),PASSWORD_DEFAULT); 
+		//hash password
+		$sql = "UPDATE users SET fullname = '$fullname', email = '$email', phone_no = '$phone_no' WHERE id='$id'";
 		$query =mysqli_query($conn,$sql);
 		if($query){
 			$message = "User successfully updated";
@@ -28,6 +38,8 @@ if (!$conn) {
 		}else{
 			$message = "Something went wrong please try again";
 		}
+	}
+}
 	}
 
 	//update users details
@@ -122,6 +134,8 @@ while($row=$query->fetch_assoc()) {
     		<thead>
 				<tr>
 					<td class="text-success font-weight-bold"><?php echo $message;?></td>
+					<td class="text-danger font-weight-bold"><?php echo $error;?></td>
+
 				</tr>
     			<tr>
     				<td class="text-center font-weight-bold">#</td>
@@ -157,15 +171,13 @@ while($row=$query->fetch_assoc()) {
 							      	<form method="post" action="">
 							      		<input type="number" name="id" class="form-control" value="<?php echo $rows['id'];?>" hidden>
 							      		<label class="font-weight-bold">Fullname :</label>
-							      		<input type="text" name="fullname" class="form-control" value="<?php echo $rows['fullname'];?>
-							      		">
+							      		<input type="text" name="fullname" class="form-control" value="<?php echo $rows['fullname'];?>">
 							      		<label class="font-weight-bold">Email :</label>
-							      		<input type="email" name="email" class="form-control" value="<?php echo $rows['email'];?>
-							      		">
+							      		<input type="email" name="email" class="form-control" value="<?php echo $rows['email'];?>">
 							      		<label class="font-weight-bold">Phone number :</label>
-							            
 							            <input type="number" name="phone_no" class="form-control" value="<?php echo $rows['phone_no'];?>">
-							            <input type="password" name="password" class="form-control" value="<?php echo $rows['password'];?>">
+							            <!-- <label class="font-weight-bold">Password :</label>
+							            <input type="password" name="password" class="form-control" value="<?php echo $rows['password'];?>"> -->
 							      		
 							      	</div>
 							      <div class="modal-footer">

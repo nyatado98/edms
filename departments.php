@@ -282,11 +282,10 @@ while($row=$query->fetch_assoc()) {
 							      <div class="modal-body">
 							      	<form method="post" action="">
 							      		<!-- <?php echo $row['id'];?> -->
-							      		<input type="number" name="id" class="form-control" value="<?php echo $row['id'];?>">
+							      		<input type="number" name="id" class="form-control" value="<?php echo $row['id'];?>" hidden>
 							      		<label class="font-weight-bold">Department Name :</label>
 
-							      		<input type="text" name="department" class="form-control" value="<?php echo $row['departmentName'];?>
-							      		">
+							      		<input type="text" name="department" class="form-control" value="<?php echo $row['departmentName'];?>">
 							      	
 							      		<!-- <span><?php echo $de ?></span> -->
 							      		
@@ -345,7 +344,7 @@ while($row=$query->fetch_assoc()) {
 							      		<label class="font-weight-bold">Department Name :</label>
 							      		<input type="text" name="department" class="form-control" value="<?php echo $row['department'];?>">
 							      		<label class="font-weight-bold">Sub-Department Name :</label>
-							      		<input type="text" name="subDepartment" class="form-control" value="<?php echo $row['subDepartmentName'];?>">
+						                <input type="text" name="subDepartment" class="form-control" value="<?php echo $row['subDepartmentName'];?>">
 
 							      	
 							      	</div>
