@@ -1,6 +1,6 @@
 <?php 
 session_start();
-
+$email = $_SESSION['email'];
 if(!isset($_SESSION["loggedin"]) && $_SESSION["email"] != true){
     header("location:login");
     exit;
