@@ -119,7 +119,7 @@ if (isset($_POST['login'])) {
                                      $_SESSION['login_time'] = $login_time;
                               }
                             // Redirect user to index page
-                            header("location:index");
+                            header("location:index.php");
                             
                             // $sql = "UPDATE users SET user_status ='Loggedin' WHERE tel = '$tel' AND user_type='admin'";
                             // $rest = mysqli_query($mysqli,$sql);
