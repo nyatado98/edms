@@ -28,24 +28,24 @@ $result = mysqli_query($conn,$sql);
  $docerr = $docFileerr = $docNameerr = $departmenterr = $subDepartmenterr = $docDescerr = $messageerr = $err = '';
 // $errors = array();
  $errors = " ";
-if (isset($_POST['search'])) {
-	if (empty($_POST['docname'])) {
-		$docerr = "Enter the document name please";
-	}else{
-		$docname = trim($_POST['docname']);
-	}
-	if (empty($docerr)) {
-		$sql ="SELECT * FROM documents WHERE document_name = '$docname'";
-		$r = mysqli_query($conn,$sql);
-		$count = mysqli_num_rows($r);
-		if ($count>0) {
-			$_SESSION['docname'] = $docname;
+// if (isset($_POST['search'])) {
+// 	if (empty($_POST['docname'])) {
+// 		$docerr = "Enter the document name please";
+// 	}else{
+// 		$docname = trim($_POST['docname']);
+// 	}
+// 	if (empty($docerr)) {
+// 		$sql ="SELECT * FROM documents WHERE document_name = '$docname'";
+// 		$r = mysqli_query($conn,$sql);
+// 		$count = mysqli_num_rows($r);
+// 		if ($count>0) {
+// 			$_SESSION['docname'] = $docname;
 			
-		}else{
-			$err = "No document with that name found";
-			}
-		}
-}
+// 		}else{
+// 			$err = "No document with that name found";
+// 			}
+// 		}
+// }
 
 if (isset($_POST['upload'])) {
 	// if (empty($_POST['docFile'])) {
@@ -103,7 +103,7 @@ if (isset($_POST['upload'])) {
 		$re =mysqli_query($conn,$sql);
 		if ($re) {
 			 move_uploaded_file($tmp_name,$target.$name);
-			$message = "Document successfully Addded";
+			$message = "Document successfully Added";
 			unset($_POST['upload']);
 			header("location:index");
 		}else{
@@ -154,7 +154,7 @@ if (isset($_GET['del'])) {
         <h1 class="text-center font-weight-bold text-dark">EDMS</h1>
     </header>
     <nav class="navbar navbar-expand-lg col-md-12 navbar-dark bg-dark sticky-top">
-         <a class="navbar-brand font-weight-bold" id="index" href="#">EXAMPLE EDMS</a>
+         <a class="navbar-brand font-weight-bold" id="index" href="index">EXAMPLE EDMS</a>
          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -205,61 +205,7 @@ while($row=$query->fetch_assoc()) {
     
     	<div class="container-fluid mb-2">
     		<div class="row">
-    			<!-- <div class="col-md-3 bg-dark"> -->
-    				
-    				<!-- <div class="column" style="border-bottom: .1px solid white;">
-    					<div class="row dropdown mx-auto justify-content-between">
-    				<a href="#" id="dropdown" data-target="#new" data-toggle="collapse" style="color: white;text-decoration: none;font-size:20px;" class="collapsed font-weight-bold m-2">
-						<?php echo $r['departmentName'];?>
-					</a>
-					<p class="sub-menu collapse" id="new">
-                  <a href="">Sub departments</a>
-					</p>
-    				<a href="">
-    				<i class="fa fa-arrow-down mt-2" style="color:whitesmoke;font-size: 17px;"></i>
-    			</a>
-    			</div>
-    				</div> -->
-			<!-- 		<nav id="sidebar">
-            <div class="sidebar-header">
-                <h3 class="text-white font-weight-bold text-center" style="text-decoration:underline">Departments</h3>
-            </div>
-
-            <ul class="list-unstyled components">
-				<?php while($row = $ress->fetch_assoc()){
-					?>
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle font-weight-bold text-dark"><?php echo $row['departmentName'];?></a>
-					<?php } ?>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-					
-						
-                        <li>
-                            <a href="#">Home 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
-                    </ul>
-                </li>
-				
-            </ul>
-			
-
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="settings" class="download">Settings</a>
-                </li>
-                <li>
-                    <a href="logout" class="article">Log out</a>
-                </li>
-            </ul>
-        </nav> -->
-
-    			<!-- </div> -->
+    			
     			<div class="col-md-8">
 				<button type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
@@ -309,7 +255,7 @@ if (isset($_POST['search'])) {
     			<div class="card-body">
     				<!-- <p><?php echo $row['document_name'];?></p> -->
     			<!-- <img style="height: 500px" src="<?php echo 'document_files/' .$row['document_file'];?>"alt="" class="img-fluid" width="800px"> -->
-    			<iframe style="height: 500px;width: 800px" src="<?php echo 'document_files/'.$row['document_file'];?>" class="img-fluid"></iframe>
+    			<iframe style="height: 650px;width: 1000px" src="<?php echo 'document_files/'.$row['document_file'];?>" class="img-fluid"></iframe>
     			</div>
     		<?php }}
     		// else{
