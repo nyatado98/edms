@@ -274,7 +274,7 @@ if (isset($_POST['search'])) {
     				<div class="row">
     					
     					<a href="index?del=<?php (!isset($_POST['search']))? print_r(""): print_r($document_name);?>" onClick="return confirm('Are you sure you want do delete?')" name="del"><buttton class="btn btn-danger font-weight-bold" >Delete</buttton></a>
-    					<a href="index?print=<?php echo $docname;?>" name="print"><buttton class="btn btn-primary font-weight-bold mx-2" >Print</buttton></a>
+    					<a href="index?print=<?php echo $docname;?>"onClick="windows.print()" name="print"><buttton class="btn btn-primary font-weight-bold mx-2" >Print</buttton></a>
     					<a href="index?export=<?php echo $docname;?>" name="export"><buttton class="btn btn-warning mx-2 font-weight-bold" >Export</buttton></a>
     				</div>
     			</form>
