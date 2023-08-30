@@ -21,8 +21,8 @@ if (!$conn) {
 		$result = mysqli_query($conn,$sql);
 		while($r = $result->fetch_assoc()){
 			if ($r['fullname'] == $_POST['fullname'] && $r['email'] == $_POST['email'] && $r['phone_no'] == $_POST['phone_no']) {
-				header("location:users");
 				$error = "No changes made";
+				header("location:users");
 			}else{
 		
 		$fullname = $_POST['fullname'];
